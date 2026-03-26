@@ -63,7 +63,7 @@ Use this installation mode if you want the a version from particular GitHub bran
 
 ```
 pip install Cython
-python -m pip install git+https://github.com/truongbv210/vi-text-processing.git@{vi_custom}#egg=nemo_text_processing
+python -m pip install git+https://github.com/truongbv210/vi-text-processing.git@{vi_only}#egg=nemo_text_processing
 ```
 
 
