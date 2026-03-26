@@ -38,8 +38,11 @@ from nemo_text_processing.inverse_text_normalization.vi.taggers.telephone import
 from nemo_text_processing.inverse_text_normalization.vi.taggers.time import TimeFst
 from nemo_text_processing.inverse_text_normalization.vi.taggers.whitelist import WhiteListFst
 from nemo_text_processing.inverse_text_normalization.vi.taggers.word import WordFst
-from nemo_text_processing.text_normalization.en.graph_utils import INPUT_LOWER_CASED
+# from nemo_text_processing.text_normalization.en.graph_utils import INPUT_LOWER_CASED
 from nemo_text_processing.utils.logging import logger
+
+INPUT_CASED = "cased"
+INPUT_LOWER_CASED = "lower_cased"
 
 
 class ClassifyFst(GraphFst):
