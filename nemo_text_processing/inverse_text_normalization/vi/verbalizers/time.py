@@ -29,11 +29,11 @@ from nemo_text_processing.inverse_text_normalization.vi.graph_utils import (
 class TimeFst(GraphFst):
     """
     Finite state transducer for verbalizing time, e.g.
-        time { hours: "3" } -> 3h
-        time { hours: "12" minutes: "30" } -> 12:30
-        time { hours: "1" minutes: "12" second: "22"} -> 1:12:22
-        time { minutes: "36" second: "45"} -> 36p45s
-        time { hours: "2" zone: "gmt" } -> 2h gmt
+        time { hours: "3" } -> 3 giờ
+        time { hours: "12" minutes: "30" } -> 12 giờ 30 phút
+        time { hours: "1" minutes: "12" second: "22"} -> 1 giờ 12 phút 22 giây
+        time { minutes: "36" second: "45"} -> 36 phút 45 giây
+        time { hours: "2" zone: "gmt" } -> 2 giờ gmt
     """
 
     def __init__(self):
@@ -71,21 +71,21 @@ class TimeFst(GraphFst):
         )
         optional_zone = pynini.closure(zone, 0, 1)
         optional_second = pynini.closure(
-            delete_space + pynutil.insert(":") + (second @ add_leading_zero_to_double_digit),
+            delete_space + pynutil.insert(" ") + (second @ add_leading_zero_to_double_digit) + pynutil.insert(" giây"),
             0,
             1,
         )
 
-        graph_h = hour + pynutil.insert("h")
+        graph_h = hour + pynutil.insert(" giờ")
         graph_hms = (
-            hour + delete_space + pynutil.insert(":") + (minute @ add_leading_zero_to_double_digit) + optional_second
+            hour + delete_space + pynutil.insert(" giờ ") + (minute @ add_leading_zero_to_double_digit) + pynutil.insert(" phút") + optional_second
         )
         graph_ms = (
             minute
             + delete_space
-            + pynutil.insert("p")
+            + pynutil.insert(" phút ")
             + (second @ add_leading_zero_to_double_digit)
-            + pynutil.insert("s")
+            + pynutil.insert(" giây")
         )
 
         graph = pynini.union(graph_h, graph_ms, graph_hms) + optional_zone
