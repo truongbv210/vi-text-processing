@@ -63,7 +63,7 @@ Use this installation mode if you want the a version from particular GitHub bran
 
 ```
 pip install Cython
-python -m pip install git+https://github.com/NVIDIA/NeMo-text-processing.git@{BRANCH}#egg=nemo_text_processing
+python -m pip install git+https://github.com/truongbv210/vi-text-processing.git@{vi_custom}#egg=nemo_text_processing
 ```
 
 
@@ -72,8 +72,8 @@ python -m pip install git+https://github.com/NVIDIA/NeMo-text-processing.git@{BR
 Use this installation mode if you are contributing to NeMo-text-processing.
 
 ```
-git clone https://github.com/NVIDIA/NeMo-text-processing
-cd NeMo-text-processing
+git clone https://github.com/truongbv210/vi-text-processing.git
+cd vi-text-processing
 ./reinstall.sh
 ```
 
