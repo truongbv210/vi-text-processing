@@ -39,7 +39,7 @@ class MeasureFst(GraphFst):
         super().__init__(name="measure", kind="verbalize")
         optional_sign = pynini.closure(pynini.cross('negative: "true"', "-"), 0, 1)
         # Units that don't need space (time units)
-        no_space_units = pynini.union("s", "ms", "ns", "μs", "h", "min", "%")
+        no_space_units = pynini.union("s", "ms", "ns", "μs", "h", "min", "%", "°", "°c", "°f")
 
         unit_no_space = (
             pynutil.delete("units:")
