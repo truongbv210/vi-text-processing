@@ -55,7 +55,13 @@ class MeasureFst(GraphFst):
         )
 
         unit_singular = convert_space(graph_unit_singular)
-        unit_misc = pynutil.insert("/") + pynutil.delete("trên") + delete_space + convert_space(graph_unit_singular)
+        # unit_misc = pynutil.insert("/") + pynutil.delete("trên") + delete_space + convert_space(graph_unit_singular)
+        # Pattern 1: ba mươi nghìn trên [một/mỗi] lít xăng -> 30000 đồng/lít xăng
+        delete_mot = pynini.closure(pynini.union(pynutil.delete("một"), pynutil.delete("mỗi")) + delete_space, 0, 1)
+        unit_misc_tren = (pynutil.insert("/") + pynutil.delete("trên") + delete_space + delete_mot + convert_space(graph_unit_singular))
+        # Pattern 2: hai mươi nghìn một/mỗi ki lô gam gạo -> 20000 đồng/kg gạo
+        unit_misc_mot = (pynutil.insert("/") + delete_mot + delete_space + convert_space(graph_unit_singular))
+        unit_misc = pynini.union(unit_misc_tren, unit_misc_mot)
 
         unit_singular = (
             pynutil.insert('units: "')
